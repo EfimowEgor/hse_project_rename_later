@@ -2,7 +2,6 @@ from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey
 from sqlalchemy.orm import relationship
 from database import Base
 
-
 class Lv(Base):
     __tablename__ = "Lv"
 
@@ -10,7 +9,6 @@ class Lv(Base):
     Name = Column(String, nullable=False)
 
     programs = relationship("Program", back_populates="lv")
-
 
 class Types(Base):
     __tablename__ = "Types"
@@ -20,7 +18,6 @@ class Types(Base):
 
     stats = relationship("Stats", back_populates="type")
 
-
 class Program(Base):
     __tablename__ = "Program"
 
@@ -29,9 +26,7 @@ class Program(Base):
     LvID = Column(Integer, ForeignKey("Lv.id"))
 
     lv = relationship("Lv", back_populates="programs")
-
-    students = relationship("Students", back_populates="program")
-
+    stats = relationship("Stats", back_populates="program")
 
 class Students(Base):
     __tablename__ = "Students"
@@ -42,7 +37,6 @@ class Students(Base):
     Patronymic = Column(String, nullable=True)
 
     stats = relationship("Stats", back_populates="student")
-
 
 class Stats(Base):
     __tablename__ = "Stats"
@@ -60,7 +54,6 @@ class Stats(Base):
     MODULES = Column(String, nullable=True)
     ProgramID = Column(Integer, ForeignKey("Program.id"))
 
-    program = relationship("Program", back_populates="students")
+    program = relationship("Program", back_populates="stats")
     student = relationship("Students", back_populates="stats")
-
     type = relationship("Types", back_populates="stats")
