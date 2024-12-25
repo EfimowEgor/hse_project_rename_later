@@ -46,7 +46,7 @@ class Stats(Base):
     Rating = Column(String, nullable=True)
     MeanGrade = Column(DECIMAL(4, 2), nullable=True)
     MinGrade = Column(DECIMAL(5, 2), nullable=True)
-    Percentile = Column(DECIMAL(5, 2), nullable=True)
+    Percentile = Column(String, nullable=True)
     GPA = Column(DECIMAL(4, 2), nullable=True)
     Course = Column(Integer, nullable=True)
     Years = Column(String, nullable=True)

@@ -110,7 +110,7 @@ async def process_program(url, fio_set, semaphore):
                             fio = row.find("td", class_="special-table__cell special-table__cell--stud").text.strip()
                             fio_set.add(fio)
                         except AttributeError:
-                            print(f"  Could not find FIO in row for {address}")
+                            print(f"Could not find FIO in row for {address}")
                 else:
                     print(f"  No data parsed for {address}")
 

@@ -29,7 +29,7 @@ CREATE TABLE Stats (
     Rating VARCHAR(255),
     MeanGrade DECIMAL(4, 2),
     MinGrade DECIMAL(5, 2),
-    Percentile DECIMAL(5, 2),
+    Percentile VARCHAR(255),
     GPA DECIMAL(4, 2),
     Course INT,
     Years VARCHAR(255),

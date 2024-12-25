@@ -3,6 +3,7 @@ from services.student_service import create_user
 import asyncio
 from parse.parse_names import main
 
+
 def process_name_string(db, fio_string):
     parts = fio_string.split()
     if len(parts) < 2:
@@ -32,6 +33,7 @@ async def run_parser():
         print(f"An error occurred: {e}")
     finally:
         db.close()
+
 
 if __name__ == "__main__":
     asyncio.run(run_parser())

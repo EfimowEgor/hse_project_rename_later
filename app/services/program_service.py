@@ -17,3 +17,10 @@ def create_program_from_parsed_data(db: Session, program_name: str, level_name: 
     db.refresh(program)
 
     return program
+
+def get_programs(db: Session, program_name: str):
+    pg = db.query(Program).filter(Program.Name == program_name).first()
+    if pg:
+        return pg.id
+    else:
+        raise ValueError
