@@ -164,25 +164,34 @@ async def process_program(url, semaphore):
             froms = await get_all_froms(url)
             courses = await get_all_courses(url)
 
-            froms_val = []
-            froms_names = []
-            courses_a = []
-
+            froms_val_to_year = {}
             for item in froms:
                 value = item.find_all("option")
                 for option in value:
-                    froms_val.append(option.get("value"))
-                    froms_names.append(option.text.strip())
+                    from_val = option.get("value")
+                    rating_name = option.text.strip()
+                    name_parts = process_rating_name(rating_name)
+                    if name_parts["years"]:
+                        froms_val_to_year[from_val] = (
+                            name_parts["years"],
+                            name_parts["rating_type"],
+                            name_parts["modules"]
+                        )
 
-            froms_a = [froms_val, froms_names]
-
+            courses_a = []
             for item in courses:
                 value = item.find_all("option")
                 for option in value:
                     courses_a.append(option.get("value"))
 
-            for pos, elem in enumerate(product(*[froms_a[0], courses_a])):
-                address = url + f"/?course={elem[1]}&from={elem[0]}"
+            unique_froms_val = sorted(froms_val_to_year.keys(), key=lambda x: froms_val_to_year[x][0], reverse=True)
+            num_unique_froms = len(unique_froms_val)
+            num_courses = len(courses_a)
+
+            for i, (from_val, course_val) in enumerate(product(unique_froms_val, courses_a)):
+                year, rating_type, modules = froms_val_to_year[from_val]
+
+                address = url + f"/?course={course_val}&from={from_val}"
                 print(address)
 
                 data = await parse_rating_table(address)
@@ -191,13 +200,22 @@ async def process_program(url, semaphore):
                     for row in data:
                         try:
                             name, rating, g_mean, g_min, percentile, gpa = process_stats(row)
-                            course = elem[1]
-                            rating_name = froms_a[1][pos % len(froms_a[1])]
+                            course = course_val
 
-                            name_parts = process_rating_name(rating_name)
+                            yield (
+                                name,
+                                rating,
+                                g_mean,
+                                g_min,
+                                percentile,
+                                gpa,
+                                course,
+                                year,
+                                rating_type,
+                                modules,
+                                extracted_text,
+                            )
 
-                            yield(name, rating, g_mean, g_min, percentile, gpa, course, name_parts["years"], name_parts["rating_type"], name_parts["modules"], extracted_text)
-                            
                         except AttributeError:
                             print(f"Cannot parse stats table")
                 else:
