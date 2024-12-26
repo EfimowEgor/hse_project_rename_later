@@ -16,7 +16,7 @@ handle_command_functions = {
 async def accepted_start_command(message: types.Message) -> None:
     accepted_command = commands.start
     handle_command_function = handle_command_functions[accepted_command]
-    _, answer = handle_command_function(message.text)
+    _, answer = await handle_command_function(message.text)
     accepted_command = ''
     await message.answer(answer)
 
