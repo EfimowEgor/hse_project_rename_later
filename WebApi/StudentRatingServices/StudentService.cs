@@ -8,8 +8,7 @@ namespace StudentRatingServices
     {
         public async Task<bool> HasStudentAsync(string firstName, string lastName, string patronymic)
         {
-            var student = new Student(firstName, lastName, patronymic);
-            return await studentRepository.HasStudentAsync(student);
+            return await studentRepository.HasStudentAsync(firstName, lastName, patronymic);
         }
 
         public async Task<IEnumerable<Student>> GetStudentsByIncompleteNameAsync(string partName)
