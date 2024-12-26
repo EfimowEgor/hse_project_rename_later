@@ -6,12 +6,12 @@ namespace StudentRatingWebApi.Dtos
     public sealed class StudentDto
     {
         [Required]
-        [Description("Имя студента")]
-        public required string FirstName { get; init; }
-
-        [Required]
         [Description("Фамилия студента")]
         public required string LastName { get; init; }
+
+        [Required]
+        [Description("Имя студента")]
+        public required string FirstName { get; init; }
 
         [Required]
         [Description("Отчество студента")]

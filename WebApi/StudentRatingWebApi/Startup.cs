@@ -7,13 +7,15 @@ namespace StudentRatingWebApi
 {
     internal class Startup(IConfiguration configuration)
     {
-        public IConfiguration Configuration { get; } = configuration;
+        public IConfiguration Configuration => configuration;
+
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<IStudentRepository, StudentRepository>();
+            var connectionString = Configuration.GetConnectionString("StudentMySqlDb");
+            services.AddScoped<IStudentRepository>(_ => new StudentRepository(connectionString!));
             services.AddScoped<IStudentService, StudentService>();
 
             services.AddControllers();
