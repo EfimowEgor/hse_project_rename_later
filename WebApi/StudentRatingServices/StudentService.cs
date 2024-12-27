@@ -4,7 +4,7 @@ using StudentRatingDomain.Services;
 
 namespace StudentRatingServices
 {
-    public class StudentService(IStudentRepository studentRepository) : IStudentService
+    public sealed class StudentService(IStudentRepository studentRepository) : IStudentService
     {
         public async Task<bool> HasStudentAsync(string firstName, string lastName, string patronymic)
         {
