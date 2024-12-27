@@ -1,6 +1,9 @@
 ﻿namespace StudentRatingDomain.Entities
 {
-    public sealed record Student(string FirstName, string LastName, string Patronymic)
+    public sealed record Student(int Id,
+        string FirstName, 
+        string LastName, 
+        string Patronymic)
     {
 
     }
