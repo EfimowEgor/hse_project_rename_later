@@ -38,7 +38,7 @@ namespace StudentRatingDataAccess
 
             while (await reader.ReadAsync())
             {
-                var id = int.Parse(reader.GetString(0));
+                var id = reader.GetInt32(0);
                 var lastName = reader.GetString(1);
                 var patronymic = reader.GetString(2);
 
@@ -63,7 +63,7 @@ namespace StudentRatingDataAccess
 
             while (await reader.ReadAsync())
             {
-                var id = int.Parse(reader.GetString(0));
+                var id = reader.GetInt32(0);
                 var firstName = reader.GetString(1);
                 var patronymic = reader.GetString(2);
 
@@ -88,7 +88,7 @@ namespace StudentRatingDataAccess
 
             while (await reader.ReadAsync())
             {
-                var id = int.Parse(reader.GetString(0));
+                var id = reader.GetInt32(0);
                 var firstName = reader.GetString(1);
                 var lastName = reader.GetString(2);
 
