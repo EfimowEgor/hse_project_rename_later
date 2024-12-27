@@ -7,6 +7,4 @@ welcome_message = 'Привет! Я умею предоставлять инфо
 not_understand_message = 'Я тебя не понимаю. Посмотри меню команд.'
 
 find_students_by_incomplete_name_message = 'Напиши неполное ФИО студента.'
-get_rating_student_by_name_message = 'Напиши полное ФИО студента.'
-
-need_enter_full_name_message = 'Необходимо ввести полное ФИО.'
+get_rating_student_by_name_message = 'Напиши ФИО студента.'

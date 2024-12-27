@@ -52,7 +52,45 @@ async def handle_get_rating_student_by_name_command(message: str) -> tuple[bool,
     if not has_student:
         return True, 'Студент не найден.'
     
-    return True, 'Студент найден.'
+    answer = list()
+    
+    current_ratings = await api.get_current_student_ratings_by_name(first_name, last_name, patronymic)
+    after_retake_ratings = await api.get_after_retake_student_ratings_by_name(first_name, last_name, patronymic)
+    cumulative_ratings = await api.get_cumulative_student_ratings_by_name(first_name, last_name, patronymic)
+    
+    if len(current_ratings) + len(after_retake_ratings) + len(cumulative_ratings) == 0:
+        answer.append('Рейтинги студента не найдены.')
+        return answer
+    
+    answer.append('Найдены следующие рейтинги студента:')
+    
+    if len(current_ratings) != 0:
+        if len(answer) == 1:
+            answer.append(f'ОП: {current_ratings[0].program_name}')
+        
+        answer.append(create_rating_message('Текущие рейтинги', current_ratings))
+    
+    if len(after_retake_ratings) != 0:
+        if len(answer) == 1:
+            answer.append(f'ОП: {current_ratings[0].program_name}')
+        answer.append(create_rating_message('Рейтинги после пересдач', after_retake_ratings))
+    
+    if len(cumulative_ratings) != 0:
+        if len(answer) == 1:
+            answer.append(f'ОП: {current_ratings[0].program_name}')
+        answer.append(create_rating_message('Кумулятивные рейтинги', cumulative_ratings))
+    
+    return True, answer
+
+
+def create_rating_message(rating_name, ratings):
+    message = f'{rating_name}:\n\n'
+    message += f'{ratings[0]}'
+    
+    for rating in ratings[1:]:
+        message += f'\n\n{rating}'
+    
+    return message
 
 
 async def handle_unknow_command(message: str) -> tuple[bool, str]:
