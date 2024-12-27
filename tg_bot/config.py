@@ -3,4 +3,5 @@ import os
 
 load_dotenv()
 
-BOT_TOKEN = os.getenv('BOT_TOKEN')
+bot_token = os.getenv('BOT_TOKEN')
+student_api_url = os.getenv('STUDENT_API_URL')
