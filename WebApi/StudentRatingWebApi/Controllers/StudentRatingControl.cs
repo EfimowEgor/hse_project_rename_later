@@ -42,21 +42,21 @@ namespace StudentRatingWebApi.Controllers
             return Ok(ratingDtos);
         }
 
-        [HttpGet("graduate")]
-        public async Task<ActionResult<StudentRatingDto>> GetGraduateStudentRatingByNameAsync([FromQuery] string firstName,
-            [FromQuery] string lastName,
-            [FromQuery] string patronymic)
-        {
-            try
-            {
-                var rating = await studentRatingService.GetGraduateStudentRatingByNameAsync(firstName, lastName, patronymic);
-                var ratingDto = mapper.Map<StudentRatingDto>(rating);
-                return Ok(ratingDto);
-            }
-            catch
-            {
-                return NotFound();
-            }
-        }
+        //[HttpGet("graduate")]
+        //public async Task<ActionResult<StudentRatingDto>> GetGraduateStudentRatingByNameAsync([FromQuery] string firstName,
+        //    [FromQuery] string lastName,
+        //    [FromQuery] string patronymic)
+        //{
+        //    try
+        //    {
+        //        var rating = await studentRatingService.GetGraduateStudentRatingByNameAsync(firstName, lastName, patronymic);
+        //        var ratingDto = mapper.Map<StudentRatingDto>(rating);
+        //        return Ok(ratingDto);
+        //    }
+        //    catch
+        //    {
+        //        return NotFound();
+        //    }
+        //}
     }
 }
