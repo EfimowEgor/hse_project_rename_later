@@ -4,11 +4,11 @@ using StudentRatingWebApi.Dtos;
 
 namespace StudentRatingWebApi.Profiles
 {
-    internal sealed class StudentProfile : Profile
+    internal sealed class StudentRatingProfile : Profile
     {
-        public StudentProfile()
+        public StudentRatingProfile()
         {
-            CreateMap<Student, StudentDto>();
+            CreateMap<StudentRating, StudentRatingDto>();
         }
     }
 }

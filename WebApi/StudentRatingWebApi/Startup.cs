@@ -15,8 +15,12 @@ namespace StudentRatingWebApi
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var connectionString = Configuration.GetConnectionString("StudentMySqlDb");
+
             services.AddScoped<IStudentRepository>(_ => new StudentRepository(connectionString!));
+            services.AddScoped<IStudentRatingRepository>(_ => new StudentRatingRepository(connectionString!));
+
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IStudentRatingService, StudentRatingService>();
 
             services.AddControllers();
             services.AddEndpointsApiExplorer();

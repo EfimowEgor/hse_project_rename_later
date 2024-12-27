@@ -4,7 +4,7 @@ namespace StudentRatingDomain.Repositories
 {
     public interface IStudentRepository
     {
-        public Task<bool> HasStudentAsync(Student student);
+        public Task<bool> HasStudentAsync(string firstName, string lastName, string patronymic);
 
         public Task<IEnumerable<Student>> GetStudentsByFirstNameAsync(string firstName);
 
